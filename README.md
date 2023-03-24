@@ -3,6 +3,9 @@
 Simple tool for checking [PEP](https://peps.python.org/pep-0001) status updates
 since the last run.
 
+> **Note**  
+> This project supports Python 3.8 and above.
+
 ## Installation
 ```sh
 $ git clone https://github.com/trag1c/pep-tracker.git
