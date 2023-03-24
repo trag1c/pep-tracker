@@ -2,11 +2,11 @@ from __future__ import annotations
 
 import datetime as dt
 import json
-import requests
 import sys
 from pathlib import Path
 from typing import NoReturn
 
+import requests
 from dahlia import dahlia, dprint
 
 COLOR_CODES = {
