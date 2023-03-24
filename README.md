@@ -20,5 +20,7 @@ $ python -m pep-tracker
 
 ## Example
 
+<img width=50% src="https://user-images.githubusercontent.com/77130613/227407441-5a2a7370-525c-4daf-991e-b60af8058217.png">
+
 ## License
 PEP Tracker is licensed under the MIT License.
