@@ -9,7 +9,6 @@ from typing import NoReturn
 
 from dahlia import dahlia, dprint
 
-
 COLOR_CODES = {
     "Accepted": "&2",
     "Active": "&a",
@@ -27,9 +26,7 @@ URL = "https://peps.python.org/api/peps.json"
 
 class State:
     def __init__(
-        self,
-        data: dict[str, str],
-        registered_at: dt.datetime | None = None
+        self, data: dict[str, str], registered_at: dt.datetime | None = None
     ) -> None:
         self._data = data
         self.date = registered_at or dt.datetime.now(tz=dt.timezone.utc)
@@ -52,7 +49,7 @@ def get_last_state() -> State:
     with LATEST.open() as f:
         return State(
             json.load(f),
-            dt.datetime.fromtimestamp(LATEST.stat().st_mtime, tz=dt.timezone.utc)
+            dt.datetime.fromtimestamp(LATEST.stat().st_mtime, tz=dt.timezone.utc),
         )
 
 
@@ -102,7 +99,6 @@ def main() -> None:
     dprint(f"Updates detected in the last {pretty_delta(old.date, new.date)}:")
     for k, v in diff.items():
         dprint(f"&lPEP {k}:&r {fmt(v)}")
-
 
     with LATEST.open("w") as f:
         f.write(new.dump())
