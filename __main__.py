@@ -13,7 +13,7 @@ from dahlia import dahlia, dprint
 COLOR_CODES = {
     "Accepted": "&2",
     "Active": "&a",
-    "Deferred": "&c",
+    "Deferred": "&6",
     "Draft": "&8",
     "Final": "&1",
     "Provisional": "&5",
