@@ -96,7 +96,8 @@ def main() -> None:
     delta = pretty_delta(old.date, new.date)
 
     if not diff:
-        dexit(f"&cNo updates detected in the last {delta}.")
+        dprint(f"&cNo updates detected in the last {delta}.")
+        sys.exit()
 
     dprint(f"Updates detected in the last {pretty_delta(old.date, new.date)}:")
     for k, v in diff.items():
