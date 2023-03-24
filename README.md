@@ -1,7 +1,6 @@
 # PEP Tracker
 
-Simple tool for checking [PEP](https://peps.python.org/pep-0001) status updates
-since the last run.
+Simple tool for checking [PEP](https://peps.python.org/pep-0001) status updates.
 
 > **Note**  
 > This project supports Python 3.8 and above.
@@ -20,6 +19,10 @@ $ python -m pep-tracker
 # Depending on your Python installation, you might need to use
 # `python3` or `py` instead.
 ```
+A JSON file will be created on the first run.
+Subsequent runs will use this file as a point of reference to compare against
+the current state. The file will be updated with the new state after each run
+(unless there have been no updates).
 
 ## Example
 
