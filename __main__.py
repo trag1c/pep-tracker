@@ -18,9 +18,10 @@ __version__ = "0.1.0"
 
 
 class Status(str, Enum):
-    def _generate_next_value_(
+    def _generate_next_value_(  # type: ignore
         name: str, start: int, count: int, last_values: list[str]
     ) -> str:
+        # https://github.com/python/mypy/issues/7591
         return name.title().replace("_", " ")
 
     ACCEPTED = auto()
