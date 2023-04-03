@@ -75,11 +75,11 @@ class State:
         return {k: (self[k], other[k]) for k in self._data if self[k] is not other[k]}
 
     @classmethod
-    def from_api(cls, data: dict[str, dict[str, str]], /) -> Self:
+    def from_api(cls, data: dict[str, dict[str, str]]) -> Self:
         return cls(data={PEP(k): Status(v["status"]) for k, v in data.items()})
 
     @classmethod
-    def _migrate(cls, old: dict[str, Any] | StateDict, /) -> StateDict:
+    def _migrate(cls, old: dict[str, Any] | StateDict) -> StateDict:
         out = StateDict(version=cls.version, data={}, time=now().isoformat())
         old_version = old.get("version")
         if old_version is None:
@@ -90,7 +90,7 @@ class State:
         return out
 
     @classmethod
-    def from_dict(cls, state: StateDict | dict[str, Any], /) -> Self:
+    def from_dict(cls, state: StateDict | dict[str, Any]) -> Self:
         state_dict = cls._migrate(state)
         data_raw = state_dict["data"]
         data = {PEP(k): Status(v) for k, v in data_raw.items()}
