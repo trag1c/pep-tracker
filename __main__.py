@@ -60,17 +60,17 @@ def now() -> dt.datetime:
 class StateDict(TypedDict):
     version: str
     data: dict[str, str]
-    time: str
+    datetime: str
 
 
 class State:
     version: ClassVar[str] = __version__
 
     def __init__(
-        self, data: dict[PEP, Status], time: dt.datetime | None = None
+        self, data: dict[PEP, Status], datetime: dt.datetime | None = None
     ) -> None:
         self._data = data
-        self.time = time or now()
+        self.datetime = datetime or now()
 
     def __getitem__(self, key: PEP) -> Status:
         return self._data[key]
@@ -85,7 +85,7 @@ class State:
 
     @classmethod
     def _migrate(cls, old: dict[str, Any] | StateDict) -> StateDict:
-        out = StateDict(version=cls.version, data={}, time=now().isoformat())
+        out = StateDict(version=cls.version, data={}, datetime=now().isoformat())
         old_version = old.get("version")
         if old_version is None:
             data = cast("dict[str, str]", old.copy())
@@ -99,14 +99,14 @@ class State:
         state_dict = cls._migrate(state)
         data_raw = state_dict["data"]
         data = {PEP(k): Status(v) for k, v in data_raw.items()}
-        time = dt.datetime.fromisoformat(state_dict["time"])
-        return cls(data=data, time=time)
+        datetime = dt.datetime.fromisoformat(state_dict["datetime"])
+        return cls(data=data, datetime=datetime)
 
     def to_dict(self) -> StateDict:
         return StateDict(
             version=self.version,
             data={str(k): v.value for k, v in self._data.items()},
-            time=self.time.isoformat(),
+            datetime=self.datetime.isoformat(),
         )
 
 
@@ -162,7 +162,7 @@ def main() -> None:
     new = get_current_state()
 
     diff = old ^ new
-    delta = pretty_delta(new.time - old.time)
+    delta = pretty_delta(new.datetime - old.datetime)
 
     if not diff:
         dprint(f"&cNo updates detected in the last {delta}.")
