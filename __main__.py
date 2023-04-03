@@ -3,7 +3,7 @@ from __future__ import annotations
 import datetime as dt
 import json
 import sys
-from enum import Enum
+from enum import Enum, auto
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, ClassVar, NewType, NoReturn, TypedDict, cast
 
@@ -18,16 +18,21 @@ __version__ = "0.1.0"
 
 
 class Status(str, Enum):
-    ACCEPTED = "Accepted"
-    ACTIVE = "Active"
-    DEFERRED = "Deferred"
-    DRAFT = "Draft"
-    FINAL = "Final"
-    PROVISIONAL = "Provisional"
-    REJECTED = "Rejected"
-    REPLACED = "Replaced"
-    WITHDRAWN = "Withdrawn"
-    SUPERSEDED = "Superseded"
+    def _generate_next_value_(
+        name: str, start: int, count: int, last_values: list[str]
+    ) -> str:
+        return name.title().replace("_", " ")
+
+    ACCEPTED = auto()
+    ACTIVE = auto()
+    DEFERRED = auto()
+    DRAFT = auto()
+    FINAL = auto()
+    PROVISIONAL = auto()
+    REJECTED = auto()
+    REPLACED = auto()
+    WITHDRAWN = auto()
+    SUPERSEDED = auto()
 
 
 COLOR_CODES = {
