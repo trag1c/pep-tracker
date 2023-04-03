@@ -9,7 +9,6 @@ from typing import TYPE_CHECKING, Any, ClassVar, NewType, NoReturn, TypedDict, c
 
 import requests
 from dahlia import dahlia, dprint
-from requests.exceptions import HTTPError
 
 if TYPE_CHECKING:
     from typing_extensions import Self
@@ -125,7 +124,7 @@ def get_current_state() -> State:
         req.raise_for_status()
     except requests.ReadTimeout:
         dexit("&4Connection timed out.")
-    except HTTPError:
+    except requests.exceptions.HTTPError:
         dexit(f"API response code: {req.status_code}")
     return State.from_api(json.loads(req.text))
 
